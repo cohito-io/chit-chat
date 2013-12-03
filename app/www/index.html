@@ -17,7 +17,7 @@
     specific language governing permissions and limitations
     under the License.
 -->
-<html ng-app>
+<html ng-app="ChitChat">
     <head>
         <meta charset="utf-8" />
         <meta name="format-detection" content="telephone=no" />
@@ -34,10 +34,17 @@
                 <p class="event received">Device is Ready 2</p>
             </div>
             <input ng-model="variable"></input>
-            {{ variable }}
+            {{ variable | uppercase }}
+            <div ng-hide="variable == 'abc'" style="width: 100px; height: 100px; background: red">asdad</div>
+
+            <div ng-controller="RecordingController">
+                <button ng-click="recordMessage()">Say it!</button>
+            </div>
         </div>
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="bower_components/angular/angular.js"></script>
+        <script type="text/javascript" src="js/angular_main.js"></script>
+        <script type="text/javascript" src="js/controllers/recording_controller.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript">
             app.initialize();
