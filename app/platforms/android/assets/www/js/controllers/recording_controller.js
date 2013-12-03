@@ -2,6 +2,7 @@
 
 angular.module('ChitChat').controller('RecordingController', function ($scope, $timeout) {
 	$scope.recordMessage = function () {
+		alert('ok');
 		var src = 'message.amr';
 		var mediaRec = new Media(src, onSuccess, onError);
 		mediaRec.startRecord();
@@ -10,5 +11,28 @@ angular.module('ChitChat').controller('RecordingController', function ($scope, $
 			mediaRec.stopRecord();
 			alert('ok');
 		}, 2000);
+
+		function onSuccess() {
+			window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, fsOkay, fsError);
+			console.log('Recorded');
+
+			function fsOkay(fs) {
+				console.log('fs okay');
+
+				fs.root.getFile(src, null, function (file) {
+					console.log(file);
+				}, function (err) {
+					console.log('err', err);
+				});
+			}
+
+			function fsError() {
+				console.log('fs error');
+			}
+		}
+
+		function onError(err) {
+			console.log('Error recording', err);
+		}
 	};
 });
