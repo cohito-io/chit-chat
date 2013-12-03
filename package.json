@@ -4,6 +4,7 @@
   "description": "Chit-Chat demo app",
   "scripts": {
     "start": "node bin/app.js",
+    "android": "cd app && cordova build android && cordova run android",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
