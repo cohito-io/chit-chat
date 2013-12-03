@@ -1,14 +1,28 @@
 'use strict';
 
-angular.module('ChitChat').controller('RecordingController', function ($scope, $timeout) {
+angular.module('ChitChat').controller('RecordingController', function ($scope, $timeout, ApiFactory) {
 	var tempFileName = 'message.amr';
 	var mediaRecorder = null;
 
-	$scope.stopRecording = function () {
+	$scope.model = {};
+	$scope.model.messages = [];
+	ApiFactory.messages().success(function (json) {
+		$scope.model.messages = json.messages;
+	});
+
+	$scope.playMessage = function(url) {
+		url = 'http://download.wavetlan.com/SVV/Media/HTTP/WAV/Media-Convert/Media-Convert_test2_PCM_Mono_VBR_8SS_48000Hz.wav';
+		var mediaPlayer = new Media(url, onSuccess, onError);
+
+		function onSuccess() {}
+		function onError() {}
+	};
+
+	$scope.stopRecording = function() {
 		mediaRecorder.stopRecord();
 	};
 
-	$scope.startRecording = function () {
+	$scope.startRecording = function() {
 		mediaRecorder = new Media(tempFileName, uploadRecording, recordingError);
 		mediaRecorder.startRecord();
 	};
@@ -32,7 +46,7 @@ angular.module('ChitChat').controller('RecordingController', function ($scope, $
 				options.headers['Authorization'] = 'Bearer 5';
 
 				var ft = new FileTransfer();
-				ft.upload(file.fullPath, 'http://kubraum.pl:7654/messages', function success() {
+				ft.upload(file.fullPath, $scope.API_ENDPOINT + '/messages', function success() {
 					console.log('Recording uploaded.');
 				}, function error(err) {
 					console.log('error', err);

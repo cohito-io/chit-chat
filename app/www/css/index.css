@@ -135,3 +135,18 @@ div[ng-controller="RecordingController"] button.pressed {
     height: 100px;
     background: yellow;
 }
+
+.message img {
+    width: 75px;
+    float: left;
+}
+
+.message .play {
+    width: 75px;
+    height: 75px;
+    float: right;
+    background-image: url('../img/play.png');
+    background-size: 35px;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}

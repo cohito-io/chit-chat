@@ -1,9 +1,9 @@
 'use strict';
 
-angular.module('ChitChat').factory('ApiFactory', ['$http', function ($http) {
+angular.module('ChitChat').factory('ApiFactory', function ($http, $rootScope) {
 	return {
-		listMessages: function() {
-			return $http.get('/messages');
+		messages: function() {
+			return $http.get($rootScope.API_ENDPOINT + '/messages');
 		}
 	};
 });

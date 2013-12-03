@@ -28,26 +28,23 @@
     </head>
     <body>
         <div class="app">
-            <h1>Apache Cordova</h1>
-            <div id="deviceready" class="blink">
-                <p class="event listening">Connecting to Device</p>
-                <p class="event received">Device is Ready 2</p>
-            </div>
-            <input ng-model="variable"></input>
-            {{ variable | uppercase }}
-            <div ng-hide="variable == 'abc'" style="width: 100px; height: 100px; background: red">asdad</div>
-
-            <message/>
-
             <div ng-controller="RecordingController">
+                <div>
+                    <!--<google-avatar googleid="msg.google_id"/>
+                    {{ msg.name }} {{ msg.google_id }}-->
+                    <div ng-repeat="msg in model.messages" message googleid="msg.google_id" name="msg.name" play='playMessage(msg.audio)'/>
+                </div>
                 <button fingerdown="startRecording()" fingerup="stopRecording()"></button>
             </div>
         </div>
+
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="bower_components/angular/angular.js"></script>
-        <script type="text/javascript" src="bower_components/angular-touch/angular-touch.js"></script>
+        <!--<script type="text/javascript" src="bower_components/angular-touch/angular-touch.js"></script>-->
         <script type="text/javascript" src="js/angular_main.js"></script>
+        <script type="text/javascript" src="js/factories/api.js"></script>
         <script type="text/javascript" src="js/controllers/recording_controller.js"></script>
+        <script type="text/javascript" src="js/directives/google_avatar.js"></script>
         <script type="text/javascript" src="js/directives/touch.js"></script>
         <script type="text/javascript" src="js/directives/message.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
