@@ -1,3 +1,3 @@
 'use strict';
 
-angular.module('ChitChat', []);
+angular.module('ChitChat', ['ngTouch']);
