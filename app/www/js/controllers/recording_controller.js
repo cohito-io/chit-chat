@@ -25,8 +25,8 @@ angular.module('ChitChat').controller('RecordingController', function ($scope, $
 	});
 
 	$scope.playMessage = function(url) {
-		var url2 = 'http://download.wavetlan.com/SVV/Media/HTTP/WAV/Media-Convert/Media-Convert_test2_PCM_Mono_VBR_8SS_48000Hz.wav';
-		var mediaPlayer = new Media(url2, onSuccess, onError);
+		//var url2 = 'http://download.wavetlan.com/SVV/Media/HTTP/WAV/Media-Convert/Media-Convert_test2_PCM_Mono_VBR_8SS_48000Hz.wav';
+		var mediaPlayer = new Media(url, onSuccess, onError);
 		mediaPlayer.play();
 
 		function onSuccess() {
