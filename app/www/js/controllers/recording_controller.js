@@ -11,12 +11,12 @@ angular.module('ChitChat').controller('RecordingController', function ($scope, $
 	});*/
 
 	$scope.$watch(function () {
-		return ApiFactory.oauthToken;
+		return ApiFactory.isLoggedIn();
 	}, function (oldValue, newValue) {
 		console.log('okay');
 		ApiFactory.messages()
 			.success(function (json) {
-				console.log('messages' + json);
+				console.log('messages', json);
 				$scope.model.messages = json.messages;
 			})
 			.error(function (data, status) {

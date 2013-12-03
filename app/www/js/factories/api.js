@@ -1,18 +1,25 @@
 'use strict';
 
 angular.module('ChitChat').factory('ApiFactory', function ($http, $rootScope) {	
-	var self = {
+	var oauthToken = null;
+
+	return {
 		messages: function() {
 			return $http({
 				method: 'GET',
-				url: $rootScope.API_ENDPOINT + '/messages',
+				url: $rootScope.API_ENDPOINT + '/public-messages',
 				headers: {
-					'Authorization': 'Bearer ' + self.oauthToken
+					'Authorization': 'Bearer ' + oauthToken
 				}
 			});
 		},
-		oauthToken: null
-	};
 
-	return self;
+		isLoggedIn: function() {
+			return oauthToken !== null;
+		},
+
+		logIn: function(token) {
+			oauthToken = token;
+		}
+	};
 });

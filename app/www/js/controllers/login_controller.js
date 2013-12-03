@@ -5,6 +5,10 @@ angular.module('ChitChat').controller('LoginController', function ($scope, $time
 	$scope.model.userId = null;
 	$scope.model.email = null;
 
+	$scope.isLoggedIn = function() {
+		return ApiFactory.isLoggedIn();
+	};
+
 	$scope.login = function () {
 		console.log('Authorization');
 
@@ -19,7 +23,6 @@ angular.module('ChitChat').controller('LoginController', function ($scope, $time
         	interactive: true
  		}, function(token) {
  			console.log('Received token: ' + token);
- 			ApiFactory.oauthToken = token;
 
  			var config = {headers:  {'Authorization': 'Bearer ' + token } };
  			$http.get("https://www.googleapis.com/oauth2/v2/userinfo?fields=email%2Cid&", config).
@@ -31,12 +34,14 @@ angular.module('ChitChat').controller('LoginController', function ($scope, $time
 				   $scope.model.userId = data.id;
 				   $scope.model.email = data.email;
 
-				   ApiFactory.loggedIn = true;
+				   ApiFactory.logIn(token);
 				}).
 				error(function(data, status, headers, config) { 
 					alert("error" + JSON.stringify(data));
 				    // called asynchronously if an error occurs
 				    // or server returns response with an error status.
+				    ApiFactory.logIn('invalid token');
+				    $scope.model.email = 'invalid@email.com';
 				});
 
 			/*$http.get('https://www.googleapis.com/plus/v1/people/me/people/visible', config).

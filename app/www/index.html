@@ -29,7 +29,7 @@
     </head>
     <body>
         <div ng-controller="LoginController">
-            <div class="login-page" ng-hide="model.email">
+            <div class="login-page" ng-hide="isLoggedIn()">
                 <p>
                     Sign in with Google+ to continue.
                 </p>
@@ -37,10 +37,8 @@
                     <img src="img/gplus_signin.png" alt="Sign in with Google+" />
                 </button>
             </div>
-            <div class="messages-list" ng-controller="RecordingController" ng-show="model.email">
+            <div class="messages-list" ng-controller="RecordingController" ng-show="isLoggedIn()">
                 <div>
-                    <!--<google-avatar googleid="msg.google_id"/>
-                    {{ msg.name }} {{ msg.google_id }}-->
                     <div ng-repeat="msg in model.messages" message googleid="msg.google_id" name="msg.name" play='playMessage(msg.audio)'/>
                 </div>
                 <div class="record"><button fingerdown="startRecording()" fingerup="stopRecording()"></button></div>
