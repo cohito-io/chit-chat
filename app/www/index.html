@@ -34,7 +34,7 @@
                     {{ msg.name }} {{ msg.google_id }}-->
                     <div ng-repeat="msg in model.messages" message googleid="msg.google_id" name="msg.name" play='playMessage(msg.audio)'/>
                 </div>
-                <button fingerdown="startRecording()" fingerup="stopRecording()"></button>
+                <button class="record" fingerdown="startRecording()" fingerup="stopRecording()"></button>
             </div>
         </div>
 
