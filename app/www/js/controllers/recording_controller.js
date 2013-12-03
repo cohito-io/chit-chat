@@ -20,7 +20,18 @@ angular.module('ChitChat').controller('RecordingController', function ($scope, $
 				console.log('fs okay');
 
 				fs.root.getFile(src, null, function (file) {
-					console.log(file);
+					var options = new FileUploadOptions();
+					options.fileKey = 'message';
+					options.fileName = src;
+					options.mimeType = 'audio/amr';
+
+					var ft = new FileTransfer();
+					ft.upload('/' + src, 'http://kubraum.pl/recording', function success() {
+						console.log('uploaded');
+					}, function error(err) {
+						console.log('error', err);
+					}, options);
+
 				}, function (err) {
 					console.log('err', err);
 				});
