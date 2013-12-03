@@ -1,6 +1,7 @@
 # ANDROID / ECLIPSE
 
 platforms
+plugins
 
 # built application files
 *.apk
