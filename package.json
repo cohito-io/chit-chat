@@ -16,7 +16,8 @@
     "url": "https://github.com/cohito-io/chit-chat/issues"
   },
   "devDependencies": {
-    "cordova": "~3.2.0-0.3.0"
+    "cordova": "~3.2.0-0.3.0",
+    "bower": "~1.2.8"
   },
   "dependencies": {
     "express": "~3.4.6"

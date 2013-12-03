@@ -17,7 +17,7 @@
     specific language governing permissions and limitations
     under the License.
 -->
-<html>
+<html ng-app>
     <head>
         <meta charset="utf-8" />
         <meta name="format-detection" content="telephone=no" />
@@ -33,8 +33,11 @@
                 <p class="event listening">Connecting to Device</p>
                 <p class="event received">Device is Ready 2</p>
             </div>
+            <input ng-model="variable"></input>
+            {{ variable }}
         </div>
         <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="bower_components/angular/angular.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript">
             app.initialize();
