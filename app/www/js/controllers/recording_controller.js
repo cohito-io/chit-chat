@@ -6,8 +6,22 @@ angular.module('ChitChat').controller('RecordingController', function ($scope, $
 
 	$scope.model = {};
 	$scope.model.messages = [];
-	ApiFactory.messages().success(function (json) {
+	/*ApiFactory.messages().success(function (json) {
 		$scope.model.messages = json.messages;
+	});*/
+
+	$scope.$watch(function () {
+		return ApiFactory.oauthToken;
+	}, function (oldValue, newValue) {
+		console.log('okay');
+		ApiFactory.messages()
+			.success(function (json) {
+				console.log('messages' + json);
+				$scope.model.messages = json.messages;
+			})
+			.error(function (data, status) {
+				console.log('Error when fetching messages: ' + status);
+			});
 	});
 
 	$scope.playMessage = function(url) {
@@ -15,8 +29,13 @@ angular.module('ChitChat').controller('RecordingController', function ($scope, $
 		var mediaPlayer = new Media(url2, onSuccess, onError);
 		mediaPlayer.play();
 
-		function onSuccess() {}
-		function onError() {}
+		function onSuccess() {
+			console.log(url + ' played successfully.');
+		}
+
+		function onError(err) {
+			console.log(url + ' playback failed: ' + err);
+		}
 	};
 
 	$scope.stopRecording = function() {

@@ -22,19 +22,28 @@
         <meta charset="utf-8" />
         <meta name="format-detection" content="telephone=no" />
         <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
-        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        <!--<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />-->
+        <meta name="viewport" content="width=device-width, user-scalable=no">
         <link rel="stylesheet" type="text/css" href="css/index.css" />
         <title>Hello World</title>
     </head>
     <body>
-        <div class="app">
-            <div ng-controller="RecordingController">
+        <div ng-controller="LoginController">
+            <div class="login-page" ng-hide="model.email">
+                <p>
+                    Sign in with Google+ to continue.
+                </p>
+                <button ng-click="login()">
+                    <img src="img/gplus_signin.png" alt="Sign in with Google+" />
+                </button>
+            </div>
+            <div class="messages-list" ng-controller="RecordingController" ng-show="model.email">
                 <div>
                     <!--<google-avatar googleid="msg.google_id"/>
                     {{ msg.name }} {{ msg.google_id }}-->
                     <div ng-repeat="msg in model.messages" message googleid="msg.google_id" name="msg.name" play='playMessage(msg.audio)'/>
                 </div>
-                <button class="record" fingerdown="startRecording()" fingerup="stopRecording()"></button>
+                <div class="record"><button fingerdown="startRecording()" fingerup="stopRecording()"></button></div>
             </div>
         </div>
 
@@ -44,6 +53,7 @@
         <script type="text/javascript" src="js/angular_main.js"></script>
         <script type="text/javascript" src="js/factories/api.js"></script>
         <script type="text/javascript" src="js/controllers/recording_controller.js"></script>
+        <script type="text/javascript" src="js/controllers/login_controller.js"></script>
         <script type="text/javascript" src="js/directives/google_avatar.js"></script>
         <script type="text/javascript" src="js/directives/touch.js"></script>
         <script type="text/javascript" src="js/directives/message.js"></script>
