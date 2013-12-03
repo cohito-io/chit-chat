@@ -1,0 +1,21 @@
+{
+  "name": "chit-chat",
+  "version": "0.0.0",
+  "description": "Chit-Chat demo app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/cohito-io/chit-chat.git"
+  },
+  "author": "cohito@cohito.io",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cohito-io/chit-chat/issues"
+  },
+  "devDependencies": {
+    "cordova": "~3.2.0-0.3.0"
+  }
+}
