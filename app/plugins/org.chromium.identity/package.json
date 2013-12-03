@@ -1,0 +1,11 @@
+{
+    "version": "1.0.1",
+    "name": "org.chromium.identity",
+    "cordova_name": "Chrome Apps Identity API",
+    "engines": [
+        {
+            "name": "cordova",
+            "version": ">=3.0.0"
+        }
+    ]
+}

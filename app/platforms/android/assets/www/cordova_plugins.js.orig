@@ -1,6 +1,7 @@
 cordova.define('cordova/plugin_list', function(require, exports, module) {
 module.exports = [
     {
+<<<<<<< HEAD
         "file": "plugins/org.apache.cordova.media/www/MediaError.js",
         "id": "org.apache.cordova.media.MediaError",
         "clobbers": [
@@ -134,11 +135,7 @@ module.exports = [
         "id": "org.apache.cordova.file.resolveLocalFileSystemURI",
         "clobbers": [
             "window.resolveLocalFileSystemURI"
-        ]
-    }
-]
-module.exports = [
-    {
+=======
         "file": "plugins/org.chromium.identity/identity.js",
         "id": "org.chromium.identity.Identity",
         "clobbers": [
@@ -198,6 +195,7 @@ module.exports = [
         "id": "org.apache.cordova.inappbrowser.InAppBrowser",
         "clobbers": [
             "window.open"
+>>>>>>> d449aba6067b706161f08a7a15d2ec96be21e4c6
         ]
     }
 ]

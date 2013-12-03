@@ -22,4 +22,14 @@
     <access origin="*" />
     <preference name="fullscreen" value="true" />
     <preference name="webviewbounce" value="true" />
+    <feature name="ChromeStorage">
+        <param name="android-package" value="org.chromium.ChromeStorage" />
+    </feature>
+    <feature name="InAppBrowser">
+        <param name="android-package" value="org.apache.cordova.inappbrowser.InAppBrowser" />
+    </feature>
+    <feature name="ChromeIdentity">
+        <param name="android-package" value="org.chromium.ChromeIdentity" />
+    </feature>
+    <access origin="https://accounts.google.com/*" />
 </widget>

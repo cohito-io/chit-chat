@@ -11,8 +11,11 @@
         </activity>
     </application>
     <uses-sdk android:minSdkVersion="10" android:targetSdkVersion="18" />
+<<<<<<< HEAD
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+=======
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+>>>>>>> d449aba6067b706161f08a7a15d2ec96be21e4c6
 </manifest>
