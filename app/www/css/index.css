@@ -172,10 +172,11 @@ h1 {
     left: 0px;
     bottom: 60px;
     padding: 5%;
+    overflow: scroll-y;
 }
 
 .record {
-    position: absolute;
+    position: fixed;
     bottom: 0px;
     width: 100%;
     padding: 10px 0px 10px 0px;

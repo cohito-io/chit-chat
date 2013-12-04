@@ -6,10 +6,8 @@ angular.module('ChitChat').controller('RecordingController', function ($scope, $
 
 	$scope.model = {};
 	$scope.model.messages = [];
-	/*ApiFactory.messages().success(function (json) {
-		$scope.model.messages = json.messages;
-	});*/
 
+	// Refresh messages list upon login.
 	$scope.$watch(function () {
 		return ApiFactory.isLoggedIn();
 	}, function (oldValue, newValue) {
@@ -24,14 +22,13 @@ angular.module('ChitChat').controller('RecordingController', function ($scope, $
 			})
 			.error(function (data, status) {
 				console.log('Error when fetching messages: ' + status);
-				//$scope.model.messages = [{name: 'a', audio: 'b', date: Date.now()}];
 			});		
 	}
 
 	$scope.playMessage = function(url) {
-		//var url2 = 'http://download.wavetlan.com/SVV/Media/HTTP/WAV/Media-Convert/Media-Convert_test2_PCM_Mono_VBR_8SS_48000Hz.wav';
 		var mediaUrl = $scope.API_ENDPOINT + '/' + url;
-		console.log('Media URL: ' + mediaUrl);
+		console.log('Attempting to play: ' + mediaUrl);
+
 		var mediaPlayer = new Media(mediaUrl, onSuccess, onError);
 		mediaPlayer.play();
 
@@ -40,12 +37,9 @@ angular.module('ChitChat').controller('RecordingController', function ($scope, $
 		}
 
 		function onError(err) {
-			console.log(url + ' playback failed: ' + err);
+			console.error(err);
+			alert('Could not play this message');
 		}
-	};
-
-	$scope.stopRecording = function() {
-		mediaRecorder.stopRecord();
 	};
 
 	$scope.startRecording = function() {
@@ -53,16 +47,16 @@ angular.module('ChitChat').controller('RecordingController', function ($scope, $
 		mediaRecorder.startRecord();
 	};
 
+	$scope.stopRecording = function() {
+		mediaRecorder.stopRecord();
+	};
+
 	function uploadRecording() {
 		window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onFilesystem, onFilesystemError);
 
 		function onFilesystem(fs) {
-			console.log('FS obtained');
-
 			fs.root.getFile(tempFileName, {create: false}, function (file) {
-				console.log(file.name);
-				console.log(file.fullPath);
-				console.log(file.size);
+				console.log('New message: ' + file.fullPath);
 
 				var options = new FileUploadOptions();
 				options.fileKey = 'message';
@@ -73,23 +67,27 @@ angular.module('ChitChat').controller('RecordingController', function ($scope, $
 
 				var ft = new FileTransfer();
 				ft.upload(file.fullPath, $scope.API_ENDPOINT + '/messages', function success() {
-					console.log('Recording uploaded.');
+					console.log('New message uploaded.');
 					refreshMessages();
 				}, function error(err) {
-					console.log('error', err);
+					console.error(err);
+					alert('Could not upload message.');
 				}, options);
 
 			}, function (err) {
-				console.log('Upload file err', err);
+				console.error(err);
+				alert('Could not upload message.');
 			});
 		}
 
 		function onFilesystemError() {
-			console.log('fs error');
+			console.error(err);
+			alert('Could not upload message.');
 		}		
 	};
 
 	function recordingError() {
-		console.log('error recording');
+		console.error(err);
+		alert('Could not record message.');
 	}
 });

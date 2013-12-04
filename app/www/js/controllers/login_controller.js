@@ -23,39 +23,28 @@ angular.module('ChitChat').controller('LoginController', function ($scope, $time
         	interactive: true
  		}, function(token) {
  			console.log('Received token: ' + token);
-
- 			var config = {headers:  {'Authorization': 'Bearer ' + token } };
- 			$http.get("https://www.googleapis.com/oauth2/v2/userinfo?fields=email%2Cid&", config).
-				success(function(data, status, headers, config) {
-				   console.log('Email is ' + data.email);
-				   console.log(status + " " + JSON.stringify(data));
-
-				   $scope.model.text = status + "\n" + JSON.stringify(data);
-				   $scope.model.userId = data.id;
-				   $scope.model.email = data.email;
-
-				   ApiFactory.logIn(token);
-				}).
-				error(function(data, status, headers, config) { 
-					alert("error" + JSON.stringify(data));
-				    // called asynchronously if an error occurs
-				    // or server returns response with an error status.
-				    ApiFactory.logIn('invalid token');
-				    $scope.model.email = 'invalid@email.com';
-				});
-
-			/*$http.get('https://www.googleapis.com/plus/v1/people/me/people/visible', config).
-				success(function(data, status, headers, config) {
-					$scope.model.text = JSON.stringify(data);
-					var firend = data.items[2];
-					alert(JSON.stringfy(firend));
-				}).
-				error(function(data, status, headers, config) { 
-					alert("error" + JSON.stringify(data));
-				    // called asynchronously if an error occurs
-				    // or server returns response with an error status.
-				});*/
+ 			getUserInfo(token);
 		});
 	};
+
+	function getUserInfo(token) {
+		var API_ENDPOINT = 'https://www.googleapis.com/oauth2/v2/userinfo?fields=email%2Cid&';
+		var config = {headers: {'Authorization': 'Bearer ' + token}};
+		$http.get(API_ENDPOINT, config).
+			success(function(data, status, headers, config) {
+			   console.log('Email is ' + data.email);
+			   console.log(status + " " + JSON.stringify(data));
+
+			   $scope.model.userId = data.id;
+			   $scope.model.email = data.email;
+
+			   ApiFactory.logIn(token);
+			}).
+			error(function(data, status, headers, config) { 
+				console.error('Could not login');
+				console.error(data);
+				alert('Login error');
+			});
+	}
 });
 

@@ -11,12 +11,6 @@ angular.module('ChitChat').directive('message', function () {
 			googleid: '=',
 			name: '=',
 			play: '&'
-		}/*,
-		compile: function ($element, attr) {
-			return function(scope, element, attr) {
-				console.log('a', scope.play);
-				//scope.play = function () {alert('okay');};
-			};
-		}*/
+		}
 	};
 });
