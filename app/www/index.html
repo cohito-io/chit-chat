@@ -37,11 +37,15 @@
                     <img src="img/gplus_signin.png" alt="Sign in with Google+" />
                 </button>
             </div>
-            <div class="messages-list" ng-controller="RecordingController" ng-show="isLoggedIn()">
-                <div>
-                    <div ng-repeat="msg in model.messages" message googleid="msg.google_id" name="msg.name" play='playMessage(msg.audio)'/>
+            <div class="main-screen" ng-controller="RecordingController" ng-show="isLoggedIn()">
+                <div class='messages-list'>
+                    <div ng-repeat="msg in model.messages" message googleid="msg.google_id" name="msg.name" play='playMessage(msg.audio)'></div>
                 </div>
-                <div class="record"><button fingerdown="startRecording()" fingerup="stopRecording()"></button></div>
+                <div class="record">
+                    <button fingerdown="startRecording()" fingerup="stopRecording()">
+                        <div>Say it!</div>
+                    </button>
+                </div>
             </div>
         </div>
 

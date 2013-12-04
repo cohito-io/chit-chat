@@ -7,7 +7,7 @@ angular.module('ChitChat').factory('ApiFactory', function ($http, $rootScope) {
 		messages: function() {
 			return $http({
 				method: 'GET',
-				url: $rootScope.API_ENDPOINT + '/public-messages',
+				url: $rootScope.API_ENDPOINT + '/messages',
 				headers: {
 					'Authorization': 'Bearer ' + oauthToken
 				}
@@ -20,6 +20,10 @@ angular.module('ChitChat').factory('ApiFactory', function ($http, $rootScope) {
 
 		logIn: function(token) {
 			oauthToken = token;
+		},
+
+		getToken: function() {
+			return oauthToken;
 		}
 	};
 });

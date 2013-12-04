@@ -13,7 +13,10 @@ angular.module('ChitChat').controller('RecordingController', function ($scope, $
 	$scope.$watch(function () {
 		return ApiFactory.isLoggedIn();
 	}, function (oldValue, newValue) {
-		console.log('okay');
+		refreshMessages();
+	});
+
+	function refreshMessages() {
 		ApiFactory.messages()
 			.success(function (json) {
 				console.log('messages', json);
@@ -21,12 +24,15 @@ angular.module('ChitChat').controller('RecordingController', function ($scope, $
 			})
 			.error(function (data, status) {
 				console.log('Error when fetching messages: ' + status);
-			});
-	});
+				//$scope.model.messages = [{name: 'a', audio: 'b', date: Date.now()}];
+			});		
+	}
 
 	$scope.playMessage = function(url) {
 		//var url2 = 'http://download.wavetlan.com/SVV/Media/HTTP/WAV/Media-Convert/Media-Convert_test2_PCM_Mono_VBR_8SS_48000Hz.wav';
-		var mediaPlayer = new Media(url, onSuccess, onError);
+		var mediaUrl = $scope.API_ENDPOINT + '/' + url;
+		console.log('Media URL: ' + mediaUrl);
+		var mediaPlayer = new Media(mediaUrl, onSuccess, onError);
 		mediaPlayer.play();
 
 		function onSuccess() {
@@ -63,11 +69,12 @@ angular.module('ChitChat').controller('RecordingController', function ($scope, $
 				options.fileName = file.fullPath;
 				options.mimeType = 'audio/amr';
 				options.headers = {};
-				options.headers['Authorization'] = 'Bearer 5';
+				options.headers['Authorization'] = 'Bearer ' + ApiFactory.getToken();
 
 				var ft = new FileTransfer();
 				ft.upload(file.fullPath, $scope.API_ENDPOINT + '/messages', function success() {
 					console.log('Recording uploaded.');
+					refreshMessages();
 				}, function error(err) {
 					console.log('error', err);
 				}, options);
